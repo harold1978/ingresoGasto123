@@ -54,6 +54,7 @@ export default function ListaIngresos() {
                                 {i.descripcion} - ${i.monto} - {i.categoria} - {new Date(i.fecha.seconds * 1000).toLocaleDateString()}
                                 <button onClick={() => iniciarEdicion(i)}>Editar</button>
                                 <button onClick={() => eliminarIngreso(i.id)}>Eliminar</button>
+                                <button onClick={() => eliminarIngreso(i.id)}>Eliminar</button>
                             </>
                         )}
                     </li>

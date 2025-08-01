@@ -5,7 +5,7 @@ import logo from '../src/assets/favicon-32x32.png'; // Assuming you have a logo 
 const Nav = () => {
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-2">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light rounded mb-2">
             <div className="container-fluid">
                 <NavLink className="navbar-brand" to="/"><img src={logo} /></NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
