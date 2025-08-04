@@ -47,10 +47,48 @@ export default function ListaIngresos() {
                         <li key={i.id}>
                             {editando === i.id ? (
                                 <>
-                                    <input value={form.descripcion} onChange={e => setForm({ ...form, descripcion: e.target.value })} />
-                                    <input value={form.monto} onChange={e => setForm({ ...form, monto: e.target.value })} type="number" />
-                                    <input value={form.categoria} onChange={e => setForm({ ...form, categoria: e.target.value })} />
-                                    <button onClick={guardarEdicion}>Guardar</button>
+                                    <div className="card p-3 bg-light rounded shadow-sm">
+                                        <h6 className="mb-3">Editar Ingreso</h6>
+
+                                        <div className="row  align-items-end">
+                                            <div className="col-auto">
+                                                <label className="form-label">Descripción</label>
+                                                <input
+                                                    className="form-control"
+                                                    value={form.descripcion}
+                                                    onChange={e => setForm({ ...form, descripcion: e.target.value })}
+                                                    placeholder="Descripción"
+                                                />
+                                            </div>
+
+                                            <div className="col-auto">
+                                                <label className="form-label">Monto</label>
+                                                <input
+                                                    className="form-control"
+                                                    type="number"
+                                                    value={form.monto}
+                                                    onChange={e => setForm({ ...form, monto: e.target.value })}
+                                                    placeholder="Monto"
+                                                />
+                                            </div>
+
+                                            <div className="col-auto">
+                                                <label className="form-label">Categoría</label>
+                                                <input
+                                                    className="form-control"
+                                                    value={form.categoria}
+                                                    onChange={e => setForm({ ...form, categoria: e.target.value })}
+                                                    placeholder="Categoría"
+                                                />
+                                            </div>
+
+                                            <div className="col-auto">
+                                                <button onClick={guardarEdicion} className="btn btn-success w-100">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </>
                             ) : (
                                 <>
