@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firestore';
+import { NavLink } from 'react-router-dom';
 
 export default function ListaIngresos() {
     const [ingresos, setIngresos] = useState([]);
@@ -39,27 +40,49 @@ export default function ListaIngresos() {
     return (
         <div>
             <h2>Ingresos</h2>
-            <ul>
-                {ingresos.map(i => (
-                    <li key={i.id}>
-                        {editando === i.id ? (
-                            <>
-                                <input value={form.descripcion} onChange={e => setForm({ ...form, descripcion: e.target.value })} />
-                                <input value={form.monto} onChange={e => setForm({ ...form, monto: e.target.value })} type="number" />
-                                <input value={form.categoria} onChange={e => setForm({ ...form, categoria: e.target.value })} />
-                                <button onClick={guardarEdicion}>Guardar</button>
-                            </>
-                        ) : (
-                            <>
-                                {i.descripcion} - ${i.monto} - {i.categoria} - {new Date(i.fecha.seconds * 1000).toLocaleDateString()}
-                                <button onClick={() => iniciarEdicion(i)}>Editar</button>
-                                <button onClick={() => eliminarIngreso(i.id)}>Eliminar</button>
-                                <button onClick={() => eliminarIngreso(i.id)}>Eliminar</button>
-                            </>
-                        )}
-                    </li>
-                ))}
-            </ul>
+            {/* <ul> */}
+            <div className="mt-4">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {ingresos.map(i => (
+                        <li key={i.id}>
+                            {editando === i.id ? (
+                                <>
+                                    <input value={form.descripcion} onChange={e => setForm({ ...form, descripcion: e.target.value })} />
+                                    <input value={form.monto} onChange={e => setForm({ ...form, monto: e.target.value })} type="number" />
+                                    <input value={form.categoria} onChange={e => setForm({ ...form, categoria: e.target.value })} />
+                                    <button onClick={guardarEdicion}>Guardar</button>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="col" key={i.id}>
+                                        <div className="card h-100 shadow-sm border rounded bg-light">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{i.descripcion}</h5>
+                                                <p className="card-text">
+                                                    <strong>Monto:</strong> ${i.monto}<br />
+                                                    <strong>Categoría:</strong> {i.categoria}<br />
+                                                    <strong>Fecha:</strong>{' '}
+                                                    {i.fecha?.toDate().toLocaleDateString() || 'Sin fecha'}
+                                                </p>
+                                            </div>
+                                            <div className="card-footer bg-transparent border-top-0">
+                                                <NavLink to={`/gasto/${i.id}`} className="btn btn-primary btn-sm rounded me-1">
+                                                    Ver Gastos
+                                                </NavLink>
+                                                <button className="btn btn-success btn-sm rounded me-1" onClick={() => iniciarEdicion(i)}>Editar</button>
+                                                <button className="btn btn-danger btn-sm rounded" onClick={() => eliminarIngreso(i.id)}>Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* {i.descripcion} - ${i.monto} - {i.categoria} - {new Date(i.fecha.seconds * 1000).toLocaleDateString()} */}
+
+                                </>
+                            )}
+                        </li>
+                    ))}
+                </div>
+            </div>
+            {/* </ul> */}
         </div>
     );
 }

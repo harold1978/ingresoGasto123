@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { collection, addDoc, Timestamp, doc, deleteDoc, updateDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firestore';
+import { useParams } from 'react-router-dom';
 
-export default function RegistroGasto({ ingresoId }) {
+export default function RegistroGasto() {
   const [form, setForm] = useState({ descripcion: '', monto: '', tipo: '' });
   const [gastos, setGastos] = useState([]);
   const [editando, setEditando] = useState(null);
+  const { ingresoId } = useParams();
 
   const fetchGastos = async () => {
     const snapshot = await getDocs(collection(db, `ingresos/${ingresoId}/gastos`));

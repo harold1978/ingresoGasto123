@@ -19,6 +19,7 @@ export default function rutas() {
                     <Route path="/ingresos" element={<RegistroIngreso />} />
                     <Route path="/lista-ingresos" element={<ListaIngresos />} />
                     <Route path="/gasto" element={<RegistroGasto />} />
+                    <Route path="/gasto/:ingresoId" element={<RegistroGasto />} />
                     <Route path="/categoria" element={<h2>Administración de Categorías</h2>} />
                     {/* {footer} */}
                 </Routes>
